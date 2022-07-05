@@ -1,0 +1,14 @@
+$primary-color: #003b46;
+$primary-light: #07575b;
+$secondary-dark: #61a4ad;
+$secondary-color: #c0dee5;
+
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: $secondary-color;
+}
