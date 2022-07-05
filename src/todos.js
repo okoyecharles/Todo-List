@@ -1,7 +1,4 @@
 import Store from "./store.js";
-import {
-  editTodos
-} from "./index.js";
 
 export default class Todos {
   // Add Task on the UI
@@ -42,6 +39,19 @@ export default class Todos {
     this.editTodos()
   }
 
+  // Give a dashed style To todos when checked
+  static checkTodo(text) {
+    text.style.textDecoration = "line-through";
+    text.style.color = "grey";
+    let todos = Store.getTodos();
+    let checked = todos.filter(todo => todo.description === text.innerHTML)
+    checked[0].completed = true;
+    let rest = todos.filter(todo => todo.description !== text.innerHTML)
+    todos = [...checked, ...rest]
+    todos.sort((a, b) => a.index - b.index);
+    Store.setTodos(todos)
+  }
+
   // Edit Todos When Clicked
   static editTodos() {
     const todos = document.querySelectorAll(".task")
@@ -74,6 +84,10 @@ export default class Todos {
           }
           // Disable Edit Styles When Clicked Outside Container
           this.disableEdit()
+        } else {
+          // Add Checked (StrikeThrough) Style
+          const text = e.target.nextSibling;
+          this.checkTodo(text)
         }
       })
     })
@@ -86,7 +100,7 @@ export default class Todos {
     document.getElementById('tasks').addEventListener('click', (event) => {
       event.stopPropagation()
     }, {once: true})
-    
+
     document.body.addEventListener('click', (e) => {
       todos.forEach(todo => {
         todo.classList.remove('edit')

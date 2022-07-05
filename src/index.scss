@@ -19,6 +19,7 @@ $shadow: 0 0 10px #07575b;
   padding: 0;
   margin: 0;
   font-family: 'Poppins', sans-serif;
+  color: $primary-color;
 }
 
 body {
@@ -47,6 +48,32 @@ body {
 
 #todo-form {
   width: 100%;
+  position: relative;
+}
+
+#todo-form :nth-child(1) {
+  width: calc(100% - 55px);
+}
+
+#todo-form input[type = "submit"] {
+  position: absolute;
+  top: 3px;
+  height: calc(100% - 5px);
+  width: 30px;
+  font-size: 20px;
+  background: $secondary-color;
+  color: $primary-light;
+  font-weight: 900;
+  right: 2px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+#todo-form input[type = "submit"]:hover {
+  color: $secondary-dark;
+  background: $primary-light;
 }
 
 #todo {
