@@ -44,10 +44,15 @@ body {
   border-bottom: 1px solid $secondary-dark;
 }
 
+#todo-form {
+  width: 100%;
+}
+
 #todo {
   border: 1px solid $secondary-dark;
   font-size: 16px;
   font-style: italic;
+  width: 100%;
 }
 
 #todo:active,
