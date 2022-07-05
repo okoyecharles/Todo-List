@@ -4,7 +4,6 @@ import Todos from './todos.js';
 import Store from "./store.js";
 
 const form = document.getElementById('todo-form')
-
 form.addEventListener('submit', (e) => {
   if (form.elements.todo.value) {
     e.preventDefault()
@@ -21,3 +20,7 @@ form.addEventListener('submit', (e) => {
 
 // Dynamically render todos on page load
 Todos.load();
+
+// Delete or Edit Todo When Clicked On
+Todos.editTodos()
+

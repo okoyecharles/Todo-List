@@ -4,6 +4,7 @@ $primary-color: #003b46;
 $primary-light: #07575b;
 $secondary-dark: #61a4ad;
 $secondary-color: #c0dee5;
+$danger-light: #fecc98;
 $shadow: 0 0 10px #07575b;
 
 // Center All Elements with Flex
@@ -74,9 +75,18 @@ body {
   padding: 10px 20px;
 }
 
-.dots {
+.task.edit {
+  border: 3px solid $danger-light;
+  padding: 8px 18px;
+}
+
+.task i {
   color: $primary-light;
   padding-inline: 5px;
   margin-left: auto;
+  cursor: pointer;
+}
+
+.task > .dots {
   cursor: all-scroll;
 }
