@@ -174,7 +174,7 @@ export default class Todos {
               newTaskDes.innerHTML = input.value;
               task.replaceChild(newTaskDes, task.children[1]);
 
-              //Storage
+              // Storage
               const todosStore = Store.getTodos();
               const edited = todosStore.filter((todo) => todo.description === taskDes);
               edited[0].description = newTaskDes.innerHTML;
