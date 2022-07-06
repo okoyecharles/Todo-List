@@ -29,5 +29,8 @@ clearBtn.addEventListener('click', () => {
     if (todo.firstChild.checked) todo.remove();
   });
   todosStore = todosStore.filter((todo) => !todo.completed);
+  todosStore.forEach((todo, index) => {
+    todo.index = index;
+  });
   Store.setTodos(todosStore);
 });
