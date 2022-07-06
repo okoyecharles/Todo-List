@@ -21,9 +21,7 @@ form.addEventListener('submit', (e) => {
 // Dynamically render todos on page load
 Todos.load();
 
-// Delete or Edit Todo When Clicked On
-Todos.editTodos();
-
-
-// Also Listen for Checks on Todos
-Todos.checkTodo()
+const clearBtn = document.querySelector('section > button')
+clearBtn.addEventListener('click', () => {
+  console.log('hello')
+})

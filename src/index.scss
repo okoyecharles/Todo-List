@@ -38,6 +38,23 @@ body {
   overflow: hidden;
 }
 
+#tasks-section > button {
+  background: $secondary-color;
+  padding: 5px 10px;
+  border: none;
+  width: calc(100% - 1px);
+  transition: .2s;
+}
+
+#tasks-section > button:hover {
+  background-color: $secondary-dark;
+}
+
+#tasks-section > button:active {
+  background-color: $primary-light;
+  color: $secondary-dark;
+}
+
 #todo-prompt,
 #todo {
   background: $secondary-color;
@@ -105,6 +122,15 @@ body {
 .task.edit {
   border: 3px solid $danger-light;
   padding: 8px 18px;
+}
+
+.task textarea {
+  background: none;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  width: 221px;
+  caret-color: $primary-light;
 }
 
 .task i {

@@ -41,6 +41,8 @@ export default class Todos {
     }
     // Give Ability To Edit Recently added Todos
     this.editTodos()
+    this.checkTodo()
+    this.editMode()
   }
 
   // Give a dashed style To todos when checked
@@ -54,17 +56,17 @@ export default class Todos {
         if (e.target.checked) {
           des.style.textDecoration = 'line-through'
           des.style.color = 'grey'
-          let checked = todos.filter(todo => todo.description === des.innerHTML)
+          let checked = todos.filter(todo => todo.description === des.innerText)
           checked[0].completed = true;
-          let rest = todos.filter(todo => todo.description !== des.innerHTML)
+          let rest = todos.filter(todo => todo.description !== des.innerText)
           todos = [...checked, ...rest]
           todos.sort((a, b) => a.index - b.index);
         } else { // When Todo is Uncheked
           des.style.textDecoration = 'none'
           des.style.color = '#003b46'
-          let checked = todos.filter(todo => todo.description === des.innerHTML)
+          let checked = todos.filter(todo => todo.description === des.innerText)
           checked[0].completed = false;
-          let rest = todos.filter(todo => todo.description !== des.innerHTML)
+          let rest = todos.filter(todo => todo.description !== des.innerText)
           todos = [...checked, ...rest]
           todos.sort((a, b) => a.index - b.index);
         }
@@ -72,7 +74,6 @@ export default class Todos {
         Store.setTodos(todos)
       }
     }))
-
   }
 
   // Edit Todos When Clicked
@@ -132,6 +133,42 @@ export default class Todos {
       })
     }, {
       once: true
+    })
+  }
+
+  static editMode() {
+    const tasks = document.querySelectorAll('.task');
+    tasks.forEach(task => {
+      task.addEventListener('click', (e) => {
+        if (!e.target.classList.contains('check')) {
+          const task = e.target.closest('.task')
+          let taskDes = task.children[1].innerText;
+          const form = document.createElement('form')
+          const input = document.createElement('textarea')
+          form.append(input)
+          task.replaceChild(form, task.children[1])
+          form.firstChild.innerHTML = taskDes;
+
+          input.addEventListener('keypress', (i) => {
+            if (i.key === "Enter" && !i.shiftKey) {
+              i.preventDefault()
+              const newTaskDes = document.createElement('p')
+              newTaskDes.innerHTML = input.value
+              task.replaceChild(newTaskDes, task.children[1])
+
+              // Update Storage
+              let todosStore = Store.getTodos()
+              let edited = todosStore.filter(todo => todo.description === taskDes)
+              edited[0].description = newTaskDes.innerHTML
+              Store.setTodos(todosStore)
+              if (newTaskDes.previousSibling.checked) {
+                newTaskDes.style.textDecoration = "line-through"
+                newTaskDes.style.color = "grey"
+              }
+            }
+          })
+        }
+      }, {once: true})
     })
   }
 }

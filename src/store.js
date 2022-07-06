@@ -20,7 +20,7 @@ export default class Store {
   static deleteTodo (e) {
     e.target.parentElement.remove()
     let todos = Store.getTodos();
-    const des = e.target.previousSibling.innerHTML;
+    const des = e.target.previousSibling.firstChild.innerHTML || e.target.previousSibling.innerHTML;
     todos = todos.filter(t => t.description !== des)
     todos.forEach((todo, i) => todo.index = i)
     Store.setTodos(todos)
