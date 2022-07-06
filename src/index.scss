@@ -43,7 +43,7 @@ body {
   padding: 5px 10px;
   border: none;
   width: calc(100% - 1px);
-  transition: .2s;
+  transition: 0.2s;
 }
 
 #tasks-section > button:hover {
@@ -72,7 +72,7 @@ body {
   width: calc(100% - 55px);
 }
 
-#todo-form input[type = "submit"] {
+#todo-form input[type="submit"] {
   position: absolute;
   top: 3px;
   height: calc(100% - 5px);
@@ -85,10 +85,10 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: .2s;
+  transition: 0.2s;
 }
 
-#todo-form input[type = "submit"]:hover {
+#todo-form input[type="submit"]:hover {
   color: $secondary-dark;
   background: $primary-light;
 }
