@@ -9,7 +9,7 @@ form.addEventListener('submit', (e) => {
     e.preventDefault();
     const todos = Store.getTodos();
     const input = form.elements.todo.value;
-    const task = new Task(todos.length, input);
+    const task = new Task(todos.length + 1, input);
     Store.add(task);
     Todos.load();
     form.reset();
@@ -21,6 +21,7 @@ form.addEventListener('submit', (e) => {
 // Dynamically render todos on page load
 Todos.load();
 
+// Clear all Checked Todos whwn clicked
 const clearBtn = document.querySelector('section > button');
 clearBtn.addEventListener('click', () => {
   const todos = document.querySelectorAll('.task');
@@ -30,7 +31,7 @@ clearBtn.addEventListener('click', () => {
   });
   todosStore = todosStore.filter((todo) => !todo.completed);
   todosStore.forEach((todo, index) => {
-    todo.index = index;
+    todo.index = index + 1;
   });
   Store.setTodos(todosStore);
 });

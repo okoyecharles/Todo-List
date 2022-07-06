@@ -22,7 +22,7 @@ export default class Store {
     let todos = Store.getTodos();
     const des = e.target.previousSibling.firstChild.innerHTML || e.target.previousSibling.innerHTML;
     todos = todos.filter((t) => t.description !== des);
-    todos.forEach((todo, i) => { todo.index = i; });
+    todos.forEach((todo, i) => { todo.index = i + 1; });
     Store.setTodos(todos);
   }
 }

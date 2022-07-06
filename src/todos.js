@@ -142,11 +142,13 @@ export default class Todos {
     });
   }
 
+  // Add Ability To Rewrite Tasks after Being Added
   static editMode() {
     const tasks = document.querySelectorAll('.task');
     tasks.forEach((task) => {
       task.addEventListener('click', (e) => {
         if (!e.target.classList.contains('check')) {
+          // Disable all other Tasks on Edit Mode
           tasks.forEach((task) => {
             const text = task.children[1].firstChild.innerHTML || task.children[1].innerText;
             const p = document.createElement('p');
@@ -154,6 +156,7 @@ export default class Todos {
             task.replaceChild(p, task.children[1]);
           });
 
+          // Enable Edit Mode
           const task = e.target.closest('.task');
           const taskDes = task.children[1].innerText;
           const form = document.createElement('form');
@@ -162,14 +165,16 @@ export default class Todos {
           task.replaceChild(form, task.children[1]);
           form.firstChild.innerHTML = taskDes;
 
+          // Update Storage and UI on ENTER Keypress
           input.addEventListener('keypress', (i) => {
             if (i.key === 'Enter' && !i.shiftKey) {
+              // UI
               i.preventDefault();
               const newTaskDes = document.createElement('p');
               newTaskDes.innerHTML = input.value;
               task.replaceChild(newTaskDes, task.children[1]);
 
-              // Update Storage
+              //Storage
               const todosStore = Store.getTodos();
               const edited = todosStore.filter((todo) => todo.description === taskDes);
               edited[0].description = newTaskDes.innerHTML;
