@@ -22,5 +22,8 @@ form.addEventListener('submit', (e) => {
 Todos.load();
 
 // Delete or Edit Todo When Clicked On
-Todos.editTodos()
+Todos.editTodos();
 
+
+// Also Listen for Checks on Todos
+Todos.checkTodo()

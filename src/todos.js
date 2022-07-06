@@ -10,10 +10,14 @@ export default class Todos {
     const completed = document.createElement('input');
     completed.setAttribute('type', 'checkbox');
     completed.className = 'check'
-    if (task.completed) completed.setAttribute('checked', 'checked');
 
     const description = document.createElement('p');
     description.innerText = task.description;
+    if (task.completed) {
+      completed.setAttribute('checked', 'checked');
+      description.style.textDecoration = "line-through"
+      description.style.color = "grey"
+    }
 
     const dots = document.createElement('i');
     dots.className = 'fa-solid fa-ellipsis-vertical dots';
@@ -40,16 +44,35 @@ export default class Todos {
   }
 
   // Give a dashed style To todos when checked
-  static checkTodo(text) {
-    text.style.textDecoration = "line-through";
-    text.style.color = "grey";
-    let todos = Store.getTodos();
-    let checked = todos.filter(todo => todo.description === text.innerHTML)
-    checked[0].completed = true;
-    let rest = todos.filter(todo => todo.description !== text.innerHTML)
-    todos = [...checked, ...rest]
-    todos.sort((a, b) => a.index - b.index);
-    Store.setTodos(todos)
+  static checkTodo() {
+    const todos = document.querySelectorAll('.task');
+    todos.forEach(todo => todo.addEventListener('click', (e) => {
+      if (e.target.classList.contains('check')) {
+        const des = e.target.nextSibling;
+        let todos = Store.getTodos();
+        // When Todo is Checked
+        if (e.target.checked) {
+          des.style.textDecoration = 'line-through'
+          des.style.color = 'grey'
+          let checked = todos.filter(todo => todo.description === des.innerHTML)
+          checked[0].completed = true;
+          let rest = todos.filter(todo => todo.description !== des.innerHTML)
+          todos = [...checked, ...rest]
+          todos.sort((a, b) => a.index - b.index);
+        } else { // When Todo is Uncheked
+          des.style.textDecoration = 'none'
+          des.style.color = '#003b46'
+          let checked = todos.filter(todo => todo.description === des.innerHTML)
+          checked[0].completed = false;
+          let rest = todos.filter(todo => todo.description !== des.innerHTML)
+          todos = [...checked, ...rest]
+          todos.sort((a, b) => a.index - b.index);
+        }
+        // Update Store to Checked or Not Checked
+        Store.setTodos(todos)
+      }
+    }))
+
   }
 
   // Edit Todos When Clicked
@@ -84,22 +107,20 @@ export default class Todos {
           }
           // Disable Edit Styles When Clicked Outside Container
           this.disableEdit()
-        } else {
-          // Add Checked (StrikeThrough) Style
-          const text = e.target.nextSibling;
-          this.checkTodo(text)
         }
       })
     })
   }
 
-  static disableEdit (){
+  static disableEdit() {
     const todos = document.querySelectorAll(".task")
 
     // Remove all Edit Styles when you click outside Todo List
     document.getElementById('tasks').addEventListener('click', (event) => {
       event.stopPropagation()
-    }, {once: true})
+    }, {
+      once: true
+    })
 
     document.body.addEventListener('click', (e) => {
       todos.forEach(todo => {
@@ -109,6 +130,8 @@ export default class Todos {
         dots.className = 'fa-solid fa-ellipsis-vertical dots';
         todo.append(dots)
       })
-    }, {once: true})
+    }, {
+      once: true
+    })
   }
 }
