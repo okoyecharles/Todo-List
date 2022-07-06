@@ -23,5 +23,11 @@ Todos.load();
 
 const clearBtn = document.querySelector('section > button')
 clearBtn.addEventListener('click', () => {
-  console.log('hello')
+  let todos = document.querySelectorAll('.task')
+  let todosStore = Store.getTodos()
+  todos.forEach(todo => {
+    if (todo.firstChild.checked) todo.remove();
+  })
+  todosStore = todosStore.filter(todo => !todo.completed)
+  Store.setTodos(todosStore)
 })

@@ -130,6 +130,14 @@ export default class Todos {
         const dots = document.createElement('i');
         dots.className = 'fa-solid fa-ellipsis-vertical dots';
         todo.append(dots)
+
+        let tasks = document.querySelectorAll('.task')
+        tasks.forEach(task => {
+          const text = task.children[1].firstChild.innerHTML || task.children[1].innerText
+          const p = document.createElement('p')
+          p.innerHTML = text
+          task.replaceChild(p, task.children[1])
+        })
       })
     }, {
       once: true
@@ -139,8 +147,17 @@ export default class Todos {
   static editMode() {
     const tasks = document.querySelectorAll('.task');
     tasks.forEach(task => {
+
       task.addEventListener('click', (e) => {
         if (!e.target.classList.contains('check')) {
+          tasks.forEach(task => {
+            const text = task.children[1].firstChild.innerHTML || task.children[1].innerText
+            const p = document.createElement('p')
+            p.innerHTML = text
+            task.replaceChild(p, task.children[1])
+          })
+
+
           const task = e.target.closest('.task')
           let taskDes = task.children[1].innerText;
           const form = document.createElement('form')
@@ -168,7 +185,10 @@ export default class Todos {
             }
           })
         }
-      }, {once: true})
+      }, {
+        once: true
+      })
+
     })
   }
 }
