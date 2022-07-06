@@ -3,6 +3,7 @@ import Task from './task.js';
 import Todos from './todos.js';
 import Store from './store.js';
 
+// NOTE: Tasks are only Edited on Enter Key Press
 const form = document.getElementById('todo-form');
 form.addEventListener('submit', (e) => {
   if (form.elements.todo.value) {
