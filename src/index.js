@@ -7,7 +7,7 @@ import Store from './store.js';
 const form = document.getElementById('todo-form');
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  if (form.elements.todo.value) {   
+  if (form.elements.todo.value) {
     const todos = Store.getTodos();
     const input = form.elements.todo.value;
     const task = new Task(todos.length + 1, input);
@@ -35,4 +35,4 @@ clearBtn.addEventListener('click', () => {
   Store.setTodos(todosStore);
 });
 
-Todos.editMode()
+Todos.editMode();

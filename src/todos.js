@@ -41,9 +41,8 @@ export default class Todos {
     }
     // Give Ability To Edit Recently added Todos
     this.checkTodo();
-    this.editTodos();  
+    this.editTodos();
     this.editMode();
-    
   }
 
   // Give a dashed style To todos when checked
@@ -138,8 +137,8 @@ export default class Todos {
           p.innerHTML = text;
           task.replaceChild(p, task.children[1]);
           if (p.previousSibling.checked) {
-            p.style.textDecoration = 'line-through'
-            p.style.color = 'grey'
+            p.style.textDecoration = 'line-through';
+            p.style.color = 'grey';
           }
         });
       });
