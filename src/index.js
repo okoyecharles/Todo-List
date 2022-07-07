@@ -6,16 +6,14 @@ import Store from './store.js';
 // NOTE: Tasks are only Edited on Enter Key Press
 const form = document.getElementById('todo-form');
 form.addEventListener('submit', (e) => {
+  e.preventDefault();
   if (form.elements.todo.value) {
-    e.preventDefault();
     const todos = Store.getTodos();
     const input = form.elements.todo.value;
     const task = new Task(todos.length + 1, input);
     Store.add(task);
     Todos.load();
     form.reset();
-  } else {
-    e.preventDefault();
   }
 });
 
@@ -36,3 +34,5 @@ clearBtn.addEventListener('click', () => {
   });
   Store.setTodos(todosStore);
 });
+
+Todos.editMode();

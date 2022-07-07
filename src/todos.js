@@ -40,8 +40,8 @@ export default class Todos {
       taskList.style.display = 'none'; // Remove Shadow if there are no tasks
     }
     // Give Ability To Edit Recently added Todos
-    this.editTodos();
     this.checkTodo();
+    this.editTodos();
     this.editMode();
   }
 
@@ -109,6 +109,7 @@ export default class Todos {
         }
       });
     });
+    this.checkTodo();
   }
 
   static disableEdit() {
@@ -135,6 +136,10 @@ export default class Todos {
           const p = document.createElement('p');
           p.innerHTML = text;
           task.replaceChild(p, task.children[1]);
+          if (p.previousSibling.checked) {
+            p.style.textDecoration = 'line-through';
+            p.style.color = 'grey';
+          }
         });
       });
     }, {
@@ -146,7 +151,7 @@ export default class Todos {
   static editMode() {
     const tasks = document.querySelectorAll('.task');
     tasks.forEach((task) => {
-      task.addEventListener('click', (e) => {
+      task.addEventListener('dblclick', (e) => {
         if (!e.target.classList.contains('check')) {
           // Disable all other Tasks on Edit Mode
           tasks.forEach((task) => {
@@ -186,8 +191,6 @@ export default class Todos {
             }
           });
         }
-      }, {
-        once: true,
       });
     });
   }
