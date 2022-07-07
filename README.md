@@ -1,6 +1,17 @@
 # Todo List
 
-> In this project, I built a simple HTML Javascript Todo List.
+In this project, I built a simple HTML, SCSS and Javascript Todo List.
+
+## App Preview
+Here is a screenshot of the Todo List
+![Todo Screenshot](./app-sceenshot.png)
+
+## How To Use
+Below is a brief tutorial on how to use this project.
+- To Create a Todo Click on The `Add to List...` Input Field
+- To Delete a Todo Click on the Todo then on The Trash Button
+- To Check a Todo, check the Todo 😀
+- To Edit A Todo Double Click On The Todo, edit the Todo. Then press **ENTER** key
 
 
 ## Built With

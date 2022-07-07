@@ -1,54 +1,38 @@
 import './index.scss';
+import Task from './task.js';
+import Todos from './todos.js';
+import Store from './store.js';
 
-const tasks = [{
-  index: 0,
-  description: 'Clean the House',
-  completed: false,
-},
-{
-  index: 1,
-  description: 'Dust the Shelf',
-  completed: false,
-},
-{
-  index: 2,
-  description: 'Buy the Groceries',
-  completed: false,
-},
-];
-
-class Tasks {
-  static add(task) {
-    const taskList = document.getElementById('tasks');
-    const taskUI = document.createElement('li');
-    taskUI.className = 'task';
-
-    const completed = document.createElement('input');
-    completed.setAttribute('type', 'checkbox');
-    if (task.completed) completed.setAttribute('checked', 'checked');
-
-    const description = document.createElement('p');
-    description.innerText = task.description;
-
-    const dots = document.createElement('i');
-    dots.className = 'fa-solid fa-ellipsis-vertical dots';
-
-    taskUI.append(completed, description, dots);
-    taskList.append(taskUI);
+// NOTE: Tasks are only Edited on Enter Key Press
+const form = document.getElementById('todo-form');
+form.addEventListener('submit', (e) => {
+  if (form.elements.todo.value) {
+    e.preventDefault();
+    const todos = Store.getTodos();
+    const input = form.elements.todo.value;
+    const task = new Task(todos.length + 1, input);
+    Store.add(task);
+    Todos.load();
+    form.reset();
+  } else {
+    e.preventDefault();
   }
+});
 
-  static load() {
-    if (tasks.length) {
-      tasks.sort((a, b) => a.index - b.index); // Sort Tasks based on their Index Value
-      tasks.forEach((task) => {
-        this.add(task);
-      });
-    } else {
-      const taskList = document.getElementById('tasks');
-      taskList.style.display = 'none'; // Remove Shadow if there are no tasks
-    }
-  }
-}
+// Dynamically render todos on page load
+Todos.load();
 
-// Dynamically render tasks on page load
-Tasks.load();
+// Clear all Checked Todos whwn clicked
+const clearBtn = document.querySelector('section > button');
+clearBtn.addEventListener('click', () => {
+  const todos = document.querySelectorAll('.task');
+  let todosStore = Store.getTodos();
+  todos.forEach((todo) => {
+    if (todo.firstChild.checked) todo.remove();
+  });
+  todosStore = todosStore.filter((todo) => !todo.completed);
+  todosStore.forEach((todo, index) => {
+    todo.index = index + 1;
+  });
+  Store.setTodos(todosStore);
+});
