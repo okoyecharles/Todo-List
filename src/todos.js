@@ -1,6 +1,10 @@
 import Store from './store.js';
 
 export default class Todos {
+  static test() {
+    return 'hey'
+  }
+
   // Add Task on the UI
   static add(task) {
     const taskList = document.getElementById('tasks');
