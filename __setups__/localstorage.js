@@ -1,1 +1,2 @@
-import 'jest-localstorage-mock';
+/* eslint-disable */
+import "jest-localstorage-mock";
