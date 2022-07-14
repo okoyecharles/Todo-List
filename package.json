@@ -4,7 +4,7 @@
   "description": "In this project, I built a simple HTML Javascript Todo List.",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest content-update.test.js",
     "build": "webpack --config webpack.config.js",
     "deploy": "gh-pages -d dist",
     "start": "webpack serve --open"
@@ -32,6 +32,7 @@
     "hint": "^7.0.1",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^28.1.3",
+    "jest-localstorage-mock": "^2.4.21",
     "sass": "^1.53.0",
     "sass-loader": "^13.0.2",
     "style-loader": "^3.3.1",
@@ -46,5 +47,11 @@
   "dependencies": {
     "gh-pages": "^4.0.0",
     "jest-environment-jsdom": "^28.1.3"
+  },
+  "jest": {
+    "resetMocks": false,
+    "setupFiles": [
+      "./__setups__/localstorage.js"
+    ]
   }
 }
