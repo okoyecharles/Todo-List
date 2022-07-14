@@ -9,14 +9,14 @@ describe('test add and delete functions', () => {
   test('Add Todo Functionality', () => {
     // arrange
     document.body.innerHTML = `
-     <form id="todo-form">       
-     <input type="text" name="todo" id="todo" placeholder="Add to your list...">
-     <input type="submit" value="&#x23CE;">
-     </form>
-     <ul id="tasks">
-   
-     </ul>
-     `;
+    <form id="todo-form">       
+    <input type="text" name="todo" id="todo" placeholder="Add to your list...">
+    <input type="submit" value="&#x23CE;">
+    </form>
+    <ul id="tasks">
+  
+    </ul>
+    `;
     // act
     const task = new Task(1, 'hello');
     Todos.add(task);
@@ -29,17 +29,17 @@ describe('test add and delete functions', () => {
   test('Remove Todo Functionality', () => {
     // arrange
     document.body.innerHTML = `
-     <form id="todo-form">       
-     <input type="text" name="todo" id="todo" placeholder="Add to your list...">
-     <input type="submit" value="&#x23CE;">
-     </form>
-     <ul id="tasks">
-     <li class="task">
-     <p>hello</p>
-     <button class="remove">&#x2715;</button>
-     </li>
-     </ul>
-     `;
+    <form id="todo-form">       
+    <input type="text" name="todo" id="todo" placeholder="Add to your list...">
+    <input type="submit" value="&#x23CE;">
+    </form>
+    <ul id="tasks">
+    <li class="task">
+    <p>hello</p>
+    <button class="remove">&#x2715;</button>
+    </li>
+    </ul>
+    `;
     // act
     const task = new Task(1, 'hello');
     Todos.add(task);
