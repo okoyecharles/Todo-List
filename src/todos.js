@@ -111,7 +111,10 @@ export default class Todos {
             const bin = document.createElement('i');
             bin.className = 'fa-solid fa-trash-can';
             target.append(bin);
-            bin.addEventListener('click', Store.deleteTodo);
+            bin.addEventListener('click', (e) => {
+              const task = e.target;
+              Store.deleteTodo(task);
+            });
           }
           // Disable Edit Styles When Clicked Outside Container
           this.disableEdit();
