@@ -4,7 +4,7 @@
   "description": "In this project, I built a simple HTML Javascript Todo List.",
   "main": "index.js",
   "scripts": {
-    "test": "jest content-update.test.js",
+    "test": "jest --coverage",
     "build": "webpack --config webpack.config.js",
     "deploy": "gh-pages -d dist",
     "start": "webpack serve --open"
