@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+
+$cell-padding: 0.8rem 1rem;
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body * {
+  font-family: 'Open Sans', system-ui, sans-serif;
+  font-weight: 300;
+  color: #545862;
+}
+
+body {
+  background-color: #f6f6f6;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app {
+  width: min(100%, 30rem); /*stylelint-disable-line*/
+  background: #fff;
+  box-shadow: 0 0 0.5em #ddd;
+  border-radius: 2.5px;
+
+  header {
+    padding: $cell-padding;
+    display: flex;
+    align-items: center;
+
+    span {
+      flex: 1;
+      font-weight: 400;
+    }
+
+    .fa-refresh {
+      color: #aaa;
+      font-size: 0.9em;
+
+      &.clicked {
+        animation: spin 1s ease;
+      }
+
+      &:hover {
+        color: #888;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  border-top: 0.075rem solid #ddd;
+
+  input {
+    outline: none;
+    border: none;
+    background-color: #fff;
+    padding: $cell-padding;
+    // box-shadow: 0 0 0 0.05em;
+  }
+
+  input:nth-child(1) {
+    flex: 1;
+    font-size: 1em;
+
+    &::placeholder {
+      font-style: italic;
+    }
+  }
+
+  input:nth-child(2) {
+    color: #bbb;
+    font-size: 0.5em;
+  }
+}
+
+.todoList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    border-top: 0.075rem solid #ddd;
+    padding: $cell-padding;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .fa-ellipsis-v {
+      color: #bbb;
+      margin-left: auto;
+    }
+  }
+
+  & + button {
+    width: 100%;
+    padding: 1em;
+    background: rgb(243, 243, 243);
+    border: none;
+    outline: none;
+    font-size: 0.9em;
+    border-top: 0.075rem solid #ddd;
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}

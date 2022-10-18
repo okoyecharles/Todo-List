@@ -1,30 +1,33 @@
-import './index.scss';
-import Task from './task.js';
-import Todos from './todos.js';
-import Store from './store.js';
-import clearTodos from './clearTodos.js';
+import './styles/index.scss';
 
-// NOTE: Tasks are only Edited on Enter Key Press
-const form = document.getElementById('todo-form');
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  if (form.elements.todo.value) {
-    const todos = Store.getTodos();
-    const input = form.elements.todo.value;
-    const task = new Task(todos.length + 1, input);
-    Store.add(task);
-    Todos.load();
-    form.reset();
-  }
+const todos = [
+  {
+    index: 1,
+    completed: true,
+    description: 'Reflect best practices',
+  },
+  {
+    index: 2,
+    completed: false,
+    description: 'Become a code reviewer',
+  },
+];
+
+const todoList = document.querySelector('[data-todo-list]');
+
+todos.forEach((todo) => {
+  const { completed, description } = todo;
+
+  const todoItem = document.createElement('li');
+
+  const todoCheckbox = document.createElement('input');
+  todoCheckbox.type = 'checkbox';
+  todoCheckbox.checked = completed;
+  const todoDescription = document.createElement('span');
+  todoDescription.innerText = description;
+  const todoMore = document.createElement('i');
+  todoMore.className = 'fa fa-ellipsis-v';
+
+  todoItem.append(todoCheckbox, todoDescription, todoMore);
+  todoList.append(todoItem);
 });
-
-// Dynamically render todos on page load
-Todos.load();
-
-// Clear all Checked Todos whwn clicked
-const clearBtn = document.querySelector('section > button');
-clearBtn.addEventListener('click', () => {
-  clearTodos();
-});
-
-Todos.editMode();
