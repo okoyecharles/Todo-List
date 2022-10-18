@@ -1,17 +1,9 @@
 import './styles/index.scss';
+import App from './utils/crud';
+import Store from './utils/store';
 
-const todos = [
-  {
-    index: 1,
-    completed: true,
-    description: 'Reflect best practices',
-  },
-  {
-    index: 2,
-    completed: false,
-    description: 'Become a code reviewer',
-  },
-];
+let todos = new Store().todos;
+const app = new App();
 
 const todoList = document.querySelector('[data-todo-list]');
 
