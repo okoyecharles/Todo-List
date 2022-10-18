@@ -18,10 +18,10 @@ body {
   background-color: #f6f6f6;
   margin: 0;
   padding: 0;
+  padding-block: 2.5rem;
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .app {
@@ -29,6 +29,7 @@ body {
   background: #fff;
   box-shadow: 0 0 0.5em #ddd;
   border-radius: 2.5px;
+  height: fit-content;
 
   header {
     padding: $cell-padding;
@@ -81,6 +82,11 @@ body {
   input:nth-child(2) {
     color: #bbb;
     font-size: 0.5em;
+
+    &:is(:hover, :focus-within) {
+      color: #888;
+      cursor: pointer;
+    }
   }
 }
 
@@ -110,6 +116,14 @@ body {
     outline: none;
     font-size: 0.9em;
     border-top: 0.075rem solid #ddd;
+
+    &:is(:hover, :focus-within) {
+      background-color: rgb(240, 240, 240);
+    }
+
+    &:active {
+      background: rgb(235, 235, 235);
+    }
   }
 }
 

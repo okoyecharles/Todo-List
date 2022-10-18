@@ -30,17 +30,35 @@ class App {
     return todos;
   }
 
-  editTask(todos, index, description) {
-    const editedTodo = todos.map((todo) => {
+  editTask(index, editTodo) {
+    const editedTodo = this.store.todos.map((todo) => {
       if (todo.index === index) {
-        return { ...todo, description };
+        return { ...todo, ...editTodo };
       } else {
         return { ...todo };
       }
     });
 
+    
     this.store.update(editedTodo);
     return editedTodo;
+  }
+
+  clearAllCompleted() {
+    const filteredTodos = this.store.todos
+    .filter((todo) => todo.completed === false)
+    .map((todo, index) => {
+      index++;
+      return { ...todo, index };
+    });
+
+    this.store.update(filteredTodos);
+    return filteredTodos;
+  }
+
+  refresh() {
+    this.store.update([]);
+    return [];
   }
 }
 

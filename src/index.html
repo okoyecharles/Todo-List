@@ -11,10 +11,10 @@
     <main class="app">
       <header class="header">
         <span>Today's To Do</span>
-        <i class="fa fa-refresh"></i>
+        <i class="fa fa-refresh" data-refresh></i>
       </header>
       <div>
-        <form class="form">
+        <form class="form" data-form>
           <input
             type="text"
             name="description"
@@ -23,7 +23,7 @@
           <input type="submit" value="&#x23CE;" />
         </form>
         <ul class="todoList" data-todo-list></ul>
-        <button type="button">Clear all Completed</button>
+        <button type="button" data-clear-completed>Clear all Completed</button>
       </div>
     </main>
   </body>
