@@ -240,7 +240,7 @@ footer {
   .todoList {
     li {
       input:nth-child(1) {
-        accent-color: var(--highlight);
+        accent-color: var(--highlight); /* stylelint-disable-line */
       }
 
       &.over {

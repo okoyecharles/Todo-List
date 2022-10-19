@@ -1,34 +1,34 @@
-import dragDrop from "./drag-drop";
-import handler from "..";
-import Store from "./store";
+import dragDrop from './drag-drop.js';
+import Handler from './handler.js';
+import Store from './store.js';
 
 let { todos } = new Store();
 
 export const setTodos = (todosObj) => {
   todos = todosObj;
-}
+};
 
 export const renderTodos = () => {
-  const todoList = document.querySelector("[data-todo-list]");
+  const todoList = document.querySelector('[data-todo-list]');
 
-  todoList.innerHTML = "";
+  todoList.innerHTML = '';
   todos.forEach((todo, index) => {
     const { completed, description } = todo;
 
-    const todoItem = document.createElement("li");
-    todoItem.className = "todoItem";
-    todoItem.setAttribute("data-index", index + 1);
+    const todoItem = document.createElement('li');
+    todoItem.className = 'todoItem';
+    todoItem.setAttribute('data-index', index + 1);
     todoItem.draggable = true;
 
-    const todoCheckbox = document.createElement("input");
-    todoCheckbox.type = "checkbox";
+    const todoCheckbox = document.createElement('input');
+    todoCheckbox.type = 'checkbox';
     todoCheckbox.checked = completed;
-    todoCheckbox.className = "todoCheckbox";
-    const todoDescription = document.createElement("span");
+    todoCheckbox.className = 'todoCheckbox';
+    const todoDescription = document.createElement('span');
     todoDescription.innerText = description;
-    todoDescription.className = "todoDescription";
-    const todoMore = document.createElement("i");
-    todoMore.className = "fa fa-ellipsis-v";
+    todoDescription.className = 'todoDescription';
+    const todoMore = document.createElement('i');
+    todoMore.className = 'fa fa-ellipsis-v';
 
     todoItem.append(todoCheckbox, todoDescription, todoMore);
     todoList.append(todoItem);
@@ -36,12 +36,13 @@ export const renderTodos = () => {
 };
 
 export const addEventListeners = (app) => {
-  const todoItems = document.querySelectorAll(".todoItem");
+  const handler = new Handler(app);
+  const todoItems = document.querySelectorAll('.todoItem');
   todoItems.forEach((todo, index) => {
-    todo.children[0].addEventListener("change", (e) => {
+    todo.children[0].addEventListener('change', (e) => {
       handler.changeCheckbox(e, index);
     });
-    todo.addEventListener("click", (event) => {
+    todo.addEventListener('click', (event) => {
       handler.editTask(event, index);
     });
   });

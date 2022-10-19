@@ -6,7 +6,7 @@ class App {
   }
 
   addTask(description) {
-    let { todos } = this.store;
+    const { todos } = this.store;
     const task = {
       index: todos.length + 1,
       completed: false,
