@@ -1,26 +1,26 @@
-import Store from "./store";
+import Store from './store.js';
 
 class App {
   constructor() {
     this.store = new Store();
   }
 
-  addTask(todos, description) {
+  addTask(description) {
+    let { todos } = this.store;
     const task = {
       index: todos.length + 1,
       completed: false,
       description,
     };
-
     todos.push(task);
+
     this.store.update(todos);
+    return todos;
   }
 
-  deleteTask(todos, index) {
-    todos = todos
-      .filter((todo) => {
-        return todo.index !== index;
-      })
+  deleteTask(index) {
+    const todos = this.store.todos
+      .filter((todo) => todo.index !== index - 1)
       .map((todo, index) => {
         index++;
         return { ...todo, index };
@@ -30,7 +30,8 @@ class App {
     return todos;
   }
 
-  swapTasks(todos, index1, index2) {
+  swapTasks(index1, index2) {
+    let { todos } = this.store;
     const task1 = todos[index1 - 1];
     const task2 = todos[index2 - 1];
     todos[index2 - 1] = task1;
@@ -48,23 +49,21 @@ class App {
     const editedTodo = this.store.todos.map((todo) => {
       if (todo.index === index) {
         return { ...todo, ...editTodo };
-      } else {
-        return { ...todo };
       }
+      return { ...todo };
     });
 
-    
     this.store.update(editedTodo);
     return editedTodo;
   }
 
   clearAllCompleted() {
     const filteredTodos = this.store.todos
-    .filter((todo) => todo.completed === false)
-    .map((todo, index) => {
-      index++;
-      return { ...todo, index };
-    });
+      .filter((todo) => todo.completed === false)
+      .map((todo, index) => {
+        index++;
+        return { ...todo, index };
+      });
 
     this.store.update(filteredTodos);
     return filteredTodos;

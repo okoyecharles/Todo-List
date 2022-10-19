@@ -1,6 +1,6 @@
 class Store {
   constructor() {
-    this.storeKey = "todo-store-164192491";
+    this.storeKey = 'todo-store-164192491';
     this.todos = this.load();
   }
 
@@ -8,10 +8,9 @@ class Store {
     const { storeKey } = this;
     if (localStorage.getItem(storeKey)) {
       return JSON.parse(localStorage.getItem(storeKey));
-    } else {
-      localStorage.setItem(storeKey, JSON.stringify([]));
-      return [];
     }
+    localStorage.setItem(storeKey, JSON.stringify([]));
+    return [];
   }
 
   update(todos) {
@@ -20,4 +19,4 @@ class Store {
   }
 }
 
-export default Store
+export default Store;
