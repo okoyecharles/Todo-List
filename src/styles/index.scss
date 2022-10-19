@@ -103,6 +103,10 @@ body {
     gap: 0.5rem;
     transition: background-color 0.25s ease;
 
+    &.over {
+      background-color: #eee;
+    }
+
     &:has(input:checked) {
       span {
         text-decoration:line-through;
@@ -116,6 +120,7 @@ body {
 
     .fa-ellipsis-v {
       color: #bbb;
+      cursor: all-scroll;
     }
 
     .fa-trash {

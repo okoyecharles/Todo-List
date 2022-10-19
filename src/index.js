@@ -14,11 +14,13 @@ todoInput.focus();
 
 const render = () => {
   todoList.innerHTML = "";
-  todos.forEach((todo) => {
+  todos.forEach((todo, index) => {
     const { completed, description } = todo;
 
     const todoItem = document.createElement("li");
     todoItem.className = "todoItem";
+    todoItem.setAttribute("data-index", index + 1);
+    todoItem.draggable = true;
 
     const todoCheckbox = document.createElement("input");
     todoCheckbox.type = "checkbox";
@@ -53,7 +55,7 @@ const handleDeleteTask = (e, todoItemIndex) => {
   if (e.target.classList.contains("fa-trash")) {
     todos = app.deleteTask(todos, todoItemIndex + 1);
     render();
-    listen();
+    addEventListeners();
   }
 };
 
@@ -93,8 +95,8 @@ const handleEditTask = (event, index) => {
     const todoItem = target.closest(".todoItem");
     const todoItemIndex = getElementIndex(todoItem);
     const tempInput = document.createElement("input");
-    const trashCan = document.createElement('i');
-    trashCan.className = "fa fa-trash"
+    const trashCan = document.createElement("i");
+    trashCan.className = "fa fa-trash";
     tempInput.className = "tempInput";
     tempInput.value = todoItem.children[1].innerText;
     todoItem.replaceChild(tempInput, todoItem.children[1]);
@@ -106,18 +108,42 @@ const handleEditTask = (event, index) => {
         const description = e.target.value;
         todos = app.editTask(index + 1, { description });
         render();
-        listen();
+        addEventListeners();
       }
     });
 
-    todoItem.children[2].addEventListener(
-      "click",
-      (e) => handleDeleteTask(e, todoItemIndex)
+    todoItem.children[2].addEventListener("click", (e) =>
+      handleDeleteTask(e, todoItemIndex)
     );
   }
 };
 
-const listen = () => {
+const handleDragEvents = (todoItems) => {
+  let dragStart;
+  todoItems.forEach((todo) => {
+    todo.addEventListener("dragstart", (e) => {
+      dragStart = +e.target.dataset.index;
+    });
+    todo.addEventListener("dragenter", (e) => {
+      e.target.classList.add('over');
+    })
+    todo.addEventListener('dragleave', (e) => {
+      e.target.classList.remove('over');
+    })
+    todo.addEventListener('dragover', (e) => { e.preventDefault() })
+    todo.addEventListener('drop', (e) => {
+      e.target.classList.remove('over');
+      let dragEnd = +e.target.dataset.index
+      if (dragEnd !== dragStart) {
+        todos = app.swapTasks(todos, dragStart, dragEnd);
+        render();
+        addEventListeners();
+      }
+    })
+  });
+};
+
+const addEventListeners = () => {
   const todoItems = document.querySelectorAll(".todoItem");
   todoItems.forEach((todo, index) => {
     todo.children[0].addEventListener("change", (e) => {
@@ -127,13 +153,14 @@ const listen = () => {
       handleEditTask(event, index);
     });
   });
+  handleDragEvents(todoItems);
 };
-listen();
+addEventListeners();
 
 todoButton.addEventListener("click", () => {
   todos = app.clearAllCompleted();
   render();
-  listen();
+  addEventListeners();
 });
 
 todoReset.addEventListener("click", (e) => {
@@ -147,11 +174,11 @@ todoReset.addEventListener("click", (e) => {
 
   todos = app.refresh();
   render();
-  listen();
+  addEventListeners();
 });
 
 todoForm.addEventListener("submit", (e) => {
   handleFormSubmit(e);
   render();
-  listen();
+  addEventListeners();
 });

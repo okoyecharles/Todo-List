@@ -30,6 +30,20 @@ class App {
     return todos;
   }
 
+  swapTasks(todos, index1, index2) {
+    const task1 = todos[index1 - 1];
+    const task2 = todos[index2 - 1];
+    todos[index2 - 1] = task1;
+    todos[index1 - 1] = task2;
+    todos = todos.map((todo, index) => {
+      index++;
+      return { ...todo, index };
+    });
+
+    this.store.update(todos);
+    return todos;
+  }
+
   editTask(index, editTodo) {
     const editedTodo = this.store.todos.map((todo) => {
       if (todo.index === index) {
