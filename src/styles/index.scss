@@ -101,10 +101,39 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    transition: background-color 0.25s ease;
+
+    &:has(input:checked) {
+      span {
+        text-decoration:line-through;
+        color: #888;
+      }
+    }
+
+    .fa-ellipsis-v, .fa-trash {
+      margin-left: auto;
+    }
 
     .fa-ellipsis-v {
       color: #bbb;
-      margin-left: auto;
+    }
+
+    .fa-trash {
+      color: #545862;
+      cursor: pointer;
+    }
+
+    &:has(.tempInput) {
+      background-color: #fffeca;
+
+      .tempInput {
+        border: none;
+        outline: none;
+        font-size: 1rem;
+        width: 100%;
+        padding: 0;
+        background: transparent;
+      }
     }
   }
 
