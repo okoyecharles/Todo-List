@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import getElementIndex from '../utils/abstracts';
+import getElementIndex from '../utils/abstracts.js';
 
 describe('Abstract function', () => {
   describe('getElementIndex', () => {
@@ -9,8 +9,8 @@ describe('Abstract function', () => {
       const parent = document.createElement('div');
       const child = document.createElement('span');
       parent.append(child);
-      
+
       expect(getElementIndex(child)).toBe(0);
-    })
-  })
-})
+    });
+  });
+});
