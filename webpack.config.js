@@ -16,7 +16,7 @@ module.exports = {
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin({ template: './src/template.html' })],
+  plugins: [new HtmlWebpackPlugin({ template: './src/index.html' })],
   devServer: {
     static: {
       directory: path.join(__dirname, 'public'),

@@ -4,7 +4,7 @@ In this project, I built a simple HTML, SCSS and Javascript Todo List.
 
 ## App Preview
 Here is a screenshot of the Todo List
-![Todo Screenshot](./app-sceenshot.png)
+![Todo Screenshot](./app-screenshot.png)
 
 ## How To Use
 Below is a brief tutorial on how to use this project.
@@ -18,7 +18,7 @@ Below is a brief tutorial on how to use this project.
 
 - Major languages
     - [ ] HTML
-    - [ ] CSS
+    - [ ] Sass
     - [ ] JavaScript
 
 - Technologies used

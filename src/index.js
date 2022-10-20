@@ -1,30 +1,46 @@
-import './index.scss';
-import Task from './task.js';
-import Todos from './todos.js';
-import Store from './store.js';
-import clearTodos from './clearTodos.js';
+import './styles/index.scss';
+import App from './utils/crud.js';
+import Handler from './utils/handler.js';
+import { setTodos, renderTodos } from './utils/update.js';
 
-// NOTE: Tasks are only Edited on Enter Key Press
-const form = document.getElementById('todo-form');
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  if (form.elements.todo.value) {
-    const todos = Store.getTodos();
-    const input = form.elements.todo.value;
-    const task = new Task(todos.length + 1, input);
-    Store.add(task);
-    Todos.load();
-    form.reset();
-  }
+const app = new App();
+const handler = new Handler(app);
+
+const todoButton = document.querySelector('[data-clear-completed]');
+const todoReset = document.querySelector('[data-refresh]');
+const todoForm = document.querySelector('[data-form]');
+const todoInput = document.querySelector('[data-form-input]');
+todoInput.focus();
+
+renderTodos();
+handler.addEventListeners(app);
+
+todoButton.addEventListener('click', () => {
+  const todos = app.clearAllCompleted();
+  setTodos(todos);
+  renderTodos();
+  handler.addEventListeners();
 });
 
-// Dynamically render todos on page load
-Todos.load();
+todoReset.addEventListener('click', (e) => {
+  // this helps the refresh button to spin (1 second)
+  e.target.classList.add('clicked');
+  e.target.style.pointerEvents = 'none';
+  setTimeout(() => {
+    e.target.classList.remove('clicked');
+    e.target.style.pointerEvents = 'all';
+  }, 1000);
 
-// Clear all Checked Todos whwn clicked
-const clearBtn = document.querySelector('section > button');
-clearBtn.addEventListener('click', () => {
-  clearTodos();
+  const todos = app.refresh();
+  setTodos(todos);
+  renderTodos();
+  handler.addEventListeners();
 });
 
-Todos.editMode();
+todoForm.addEventListener('submit', (e) => {
+  handler.submitForm(e);
+  renderTodos();
+  handler.addEventListeners();
+});
+
+export default handler;
