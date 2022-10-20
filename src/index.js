@@ -1,7 +1,7 @@
 import './styles/index.scss';
 import App from './utils/crud.js';
 import Handler from './utils/handler.js';
-import { setTodos, renderTodos, addEventListeners } from './utils/update.js';
+import { setTodos, renderTodos } from './utils/update.js';
 
 const app = new App();
 const handler = new Handler(app);
@@ -13,13 +13,13 @@ const todoInput = document.querySelector('[data-form-input]');
 todoInput.focus();
 
 renderTodos();
-addEventListeners(app);
+handler.addEventListeners(app);
 
 todoButton.addEventListener('click', () => {
   const todos = app.clearAllCompleted();
   setTodos(todos);
   renderTodos();
-  addEventListeners(app);
+  handler.addEventListeners();
 });
 
 todoReset.addEventListener('click', (e) => {
@@ -34,13 +34,13 @@ todoReset.addEventListener('click', (e) => {
   const todos = app.refresh();
   setTodos(todos);
   renderTodos();
-  addEventListeners(app);
+  handler.addEventListeners();
 });
 
 todoForm.addEventListener('submit', (e) => {
   handler.submitForm(e);
   renderTodos();
-  addEventListeners(app);
+  handler.addEventListeners();
 });
 
 export default handler;

@@ -1,25 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <title>Todo-List</title>
-<script defer src="bundle.js"></script></head>
-<body>
-  <main>
-    <section id="tasks-section">
-      <h2 id="todo-prompt">Today's To Do</h2>
-      <form id="todo-form">       
-        <input type="text" name="todo" id="todo" placeholder="Add to your list...">
-        <input type="submit" value="&#x23CE;">
-      </form>
-      <ul id="tasks">
-      
-      </ul>
-      <button type="button">Clear all Checked</button>
-    </section>
-  </main>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/ea233bda26.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Todo-List</title>
+  <script defer src="bundle.js"></script></head>
+  <body>
+    <main class="app">
+      <header class="header">
+        <span>Today's To Do</span>
+        <i class="fa fa-refresh" data-refresh></i>
+      </header>
+      <div>
+        <form class="form" data-form>
+          <input
+            type="text"
+            name="description"
+            placeholder="Add to your list..."
+            data-form-input
+          />
+          <input type="submit" value="&#x23CE;" />
+        </form>
+        <ul class="todoList" data-todo-list></ul>
+        <button type="button" data-clear-completed>Clear all Completed</button>
+      </div>
+    </main>
+    <footer>
+      Thanks to
+      <a href="https://microverse.org" target="_blank" rel="noreferrer noopener"
+        >microverse</a
+      >
+      for inspiring this projects creation
+    </footer>
+  </body>
 </html>

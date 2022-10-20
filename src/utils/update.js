@@ -1,5 +1,3 @@
-import dragDrop from './drag-drop.js';
-import Handler from './handler.js';
 import Store from './store.js';
 
 let { todos } = new Store();
@@ -33,18 +31,4 @@ export const renderTodos = () => {
     todoItem.append(todoCheckbox, todoDescription, todoMore);
     todoList.append(todoItem);
   });
-};
-
-export const addEventListeners = (app) => {
-  const handler = new Handler(app);
-  const todoItems = document.querySelectorAll('.todoItem');
-  todoItems.forEach((todo, index) => {
-    todo.children[0].addEventListener('change', (e) => {
-      handler.changeCheckbox(e, index);
-    });
-    todo.addEventListener('click', (event) => {
-      handler.editTask(event, index);
-    });
-  });
-  dragDrop(app, todoItems);
 };

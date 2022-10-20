@@ -1,4 +1,4 @@
-import { setTodos, renderTodos, addEventListeners } from './update.js';
+import { setTodos, renderTodos } from './update.js';
 import getElementIndex from './abstracts.js';
 
 export default class Handler {
@@ -6,12 +6,58 @@ export default class Handler {
     this.app = app;
   }
 
+  addEventListeners() {
+    const todoItems = document.querySelectorAll('.todoItem');
+    todoItems.forEach((todo, index) => {
+      todo.children[0].addEventListener('change', (e) => {
+        this.changeCheckbox(e, index);
+      });
+      todo.addEventListener('click', (event) => {
+        this.editTask(event, index);
+      });
+    });
+    this.dragDrop(todoItems);
+  }
+
+  dragDrop(todoItems) {
+    const { app } = this;
+    let dragStart;
+
+    todoItems.forEach((todo) => {
+      todo.addEventListener('dragstart', (e) => {
+        dragStart = +e.target.dataset.index;
+      });
+      todo.addEventListener('dragenter', (e) => {
+        e.target.classList.add('over');
+      });
+      todo.addEventListener('dragleave', (e) => {
+        e.target.classList.remove('over');
+      });
+      todo.addEventListener('dragover', (e) => {
+        e.preventDefault();
+      });
+      todo.addEventListener('drop', (e) => {
+        e.target.classList.remove('over');
+        const dragEnd = +e.target.dataset.index;
+        if (dragEnd) {
+          const todos = app.swapTasks(dragStart, dragEnd);
+          setTodos(todos);
+          renderTodos();
+          this.addEventListeners();
+        }
+      });
+    });
+  }
+
   submitForm(event) {
     event.preventDefault();
+
+    const { app } = this;
+
     const description = event.target.elements.description.value;
     event.target.elements.description.value = '';
     if (description.trim().length) {
-      const todos = this.app.addTask(description);
+      const todos = app.addTask(description);
       setTodos(todos);
     }
   }
@@ -26,7 +72,7 @@ export default class Handler {
       const todos = app.deleteTask(todoItemIndex + 1);
       setTodos(todos);
       renderTodos();
-      addEventListeners(app);
+      this.addEventListeners();
     }
   }
 
@@ -53,7 +99,7 @@ export default class Handler {
     return false;
   }
 
-  editTask = (editEvent, index) => {
+  editTask(editEvent, index) {
     const { app } = this;
     const { target } = editEvent;
 
@@ -82,11 +128,11 @@ export default class Handler {
           const todos = app.editTask(index + 1, { description });
           setTodos(todos);
           renderTodos();
-          addEventListeners(app);
+          this.addEventListeners();
         }
       });
 
       todoItem.children[2].addEventListener('click', (event) => this.deleteTask(event, todoItemIndex));
     }
-  };
+  }
 }
