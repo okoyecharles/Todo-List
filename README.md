@@ -17,6 +17,9 @@
       <a href="#about-project">📖 About the Project</a>
         <ul>
           <li>
+            <a href="#preview">📸 Preview</a>
+          </li>
+          <li>
             <a href="#built-with">🛠 Built With</a>
             <ul>
               <li><a href="#tech-stack">Tech Stack</a></li>
@@ -52,6 +55,11 @@
 # 📖 Todo List <a name="about-project"></a>
 
 In this project, I built a simple HTML, SCSS and Javascript Todo List (with item swap functionality).
+
+## 📸 Preview <a name="preview"></a>
+<div align="center">
+  <img width="500px" src="app-screenshot.png" >
+</div>
 
 ## 🛠 Built With <a name="built-with"></a>
 
